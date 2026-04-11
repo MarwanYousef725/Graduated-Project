@@ -8,7 +8,6 @@ A smart Pharmacy Mobile Application designed to simplify the process of searchin
 - Upload prescriptions
 - Add medicines to cart
 - Order tracking
-- Admin dashboard for managing medicines and orders
 
 ## Technologies Used
 - Flutter
