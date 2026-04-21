@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "672026003621",
+    "project_id": "depigraduationproject",
+    "storage_bucket": "depigraduationproject.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672026003621:android:f5f2d6b221d46b0d98e54c",
+        "android_client_info": {
+          "package_name": "com.example.graduated_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcdo0qcaiC3bxEUsGnG3z5MromX5DcRso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
