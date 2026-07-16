@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -108,25 +109,21 @@ class ProductDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Image.network(
-                    product.images![0],
+                  child: CachedNetworkImage(
+                    imageUrl: product.images![0],
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
+                    errorWidget: (context, error, stackTrace) {
                       return Container(
                         alignment: Alignment.center,
                         child: Icon(
-                          Icons.error,
+                          Icons.broken_image_rounded,
                           color: Colors.red,
                           size: 32.dg,
                         ),
                       );
                     },
-                    loadingBuilder: (context, child, loadingProgress) =>
-                        loadingProgress == null
-                        ? child
-                        : Center(child: CircularProgressIndicator()),
-                    cacheHeight: 326,
-                    cacheWidth: 326,
+                    placeholder: (context, url) =>
+                        Center(child: CircularProgressIndicator()),
                   ),
                 ),
               ),

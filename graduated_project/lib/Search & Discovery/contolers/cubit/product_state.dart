@@ -19,3 +19,5 @@ final class ProductFound extends ProductState {}
 final class ProductNotFound extends ProductState {}
 
 final class SortOption extends ProductState {}
+
+final class ChangeIndexState extends ProductState {}

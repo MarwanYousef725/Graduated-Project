@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,19 +67,24 @@ class RowProductCard extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Image.network(
-                            productCubit.products[index + 10].images![0],
-                            // "https://5.imimg.com/data5/SELLER/Default/2023/4/302314470/UV/GZ/CD/7034457/salbutamol-inhaler-500x500.jpg",
+                          CachedNetworkImage(
+                            imageUrl:
+                                productCubit.products[index + 10].images![0],
+
                             width: 134.dg,
                             height: 112.dg,
-                            cacheHeight: 112,
-                            cacheWidth: 134,
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) {
-                                return child;
-                              }
-                              return Center(child: CircularProgressIndicator());
+                            errorWidget: (context, error, stackTrace) {
+                              return Container(
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  Icons.broken_image_rounded,
+                                  color: Colors.red,
+                                  size: 32.dg,
+                                ),
+                              );
                             },
+                            placeholder: (context, url) =>
+                                Center(child: CircularProgressIndicator()),
                           ),
 
                           Expanded(

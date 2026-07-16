@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduated_project/Search%20&%20Discovery/contolers/cubit/product_cubit.dart';
-import 'package:graduated_project/Search%20&%20Discovery/view/home.dart';
+import 'package:graduated_project/Splash%20Screen%20and%20Onboarding/view/splash.dart';
 import 'package:graduated_project/firebase_options.dart';
 
 void main() async {
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       child: Builder(
         builder: (context) => MaterialApp(
-          home: Scaffold(body: Center(child: Home())),
+          home: Scaffold(body: Center(child: Splash())),
         ),
       ),
     );

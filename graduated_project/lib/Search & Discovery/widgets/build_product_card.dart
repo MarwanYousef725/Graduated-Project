@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -54,20 +55,21 @@ class BuildProductCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.dg),
-                child: Image.network(
-                  item.images![0],
-                  width: 100.dg,
-                  height: 100.dg,
-                  cacheHeight: 100,
-                  cacheWidth: 100,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    return loadingProgress == null
-                        ? child
-                        : const Center(child: CircularProgressIndicator());
-                  },
-
+                child: CachedNetworkImage(
+                  imageUrl: item.images![0],
                   fit: BoxFit.cover,
-                  errorBuilder: (_, _, _) => const Icon(Icons.broken_image),
+                  errorWidget: (context, error, stackTrace) {
+                    return Container(
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.broken_image_rounded,
+                        color: Colors.red,
+                        size: 32.dg,
+                      ),
+                    );
+                  },
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
                 ),
               ),
               SizedBox(width: 12.dg),

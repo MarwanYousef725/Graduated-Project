@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,22 +47,22 @@ class ProductCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.dg),
-              child: Image.network(
-                product.images![0],
+              child: CachedNetworkImage(
+                imageUrl: product.images![0],
                 width: 96.dg,
                 height: 96.dg,
-                cacheHeight: 96,
-                cacheWidth: 96,
-                loadingBuilder: (context, child, loadingProgress) {
-                  return loadingProgress == null
-                      ? child
-                      : const Center(child: CircularProgressIndicator());
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return const Center(
-                    child: Icon(Icons.broken_image, size: 24),
+                errorWidget: (context, error, stackTrace) {
+                  return Container(
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.broken_image_rounded,
+                      color: Colors.red,
+                      size: 32.dg,
+                    ),
                   );
                 },
+                placeholder: (context, url) =>
+                    Center(child: CircularProgressIndicator()),
               ),
             ),
             Expanded(

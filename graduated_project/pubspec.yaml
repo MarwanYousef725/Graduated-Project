@@ -48,7 +48,11 @@ dependencies:
   cloud_firestore: ^6.2.0
   firebase_database: ^12.3.0
   bloc: ^9.2.0
+  cached_network_image: ^3.4.1
+  google_sign_in: ^6.2.1
+  image_picker: ^1.2.1
 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

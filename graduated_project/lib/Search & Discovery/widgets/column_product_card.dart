@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,21 +63,23 @@ class ColumnProductCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         spacing: 8.dg,
                         children: [
-                          Image.network(
-                            productCubit.products[index].images![0],
+                          CachedNetworkImage(
+                            imageUrl: productCubit.products[index].images![0],
+                            fit: BoxFit.cover,
                             width: 134.dg,
                             height: 112.dg,
-                            cacheHeight: 112,
-                            cacheWidth: 134,
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) {
-                                return child;
-                              }
-                              return Center(child: CircularProgressIndicator());
+                            errorWidget: (context, error, stackTrace) {
+                              return Container(
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  Icons.broken_image_rounded,
+                                  color: Colors.red,
+                                  size: 32.dg,
+                                ),
+                              );
                             },
-                            errorBuilder: (context, error, stackTrace) {
-                              return Center(child: Text("Error loading image"));
-                            },
+                            placeholder: (context, url) =>
+                                Center(child: CircularProgressIndicator()),
                           ),
 
                           Column(

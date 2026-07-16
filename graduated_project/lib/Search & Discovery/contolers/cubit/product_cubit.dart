@@ -38,6 +38,7 @@ class ProductCubit extends Cubit<ProductState> {
     favCollectionName,
   );
   double totalPrice = 0.0;
+  int currentIndex = 0;
   Future<void> addFavProduct(PharmacyProducts product) async {
     try {
       if (product.isFavorite == null) {
@@ -184,7 +185,7 @@ class ProductCubit extends Cubit<ProductState> {
       emit(ProductSuccess());
     } catch (e) {
       log("Error: $e");
-      emit(ProductError());
+      // emit(ProductError());
     }
   }
 
@@ -202,6 +203,11 @@ class ProductCubit extends Cubit<ProductState> {
     } catch (e) {
       emit(ProductError());
     }
+  }
+
+  void changeIndex(int index) {
+    currentIndex = index;
+    emit(ChangeIndexState());
   }
 }
 
