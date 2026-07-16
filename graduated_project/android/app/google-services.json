@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "672026003621",
+    "firebase_url": "https://depigraduationproject-default-rtdb.firebaseio.com",
     "project_id": "depigraduationproject",
     "storage_bucket": "depigraduationproject.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.graduated_project"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "672026003621-2h2it4e3uljisdfg0u7gtnmr9efumdhu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.graduated_project",
+            "certificate_hash": "0f617b5665d27593b1c6b3163de98e9a3dadba45"
+          }
+        },
+        {
+          "client_id": "672026003621-a43ol1601t7so5gcd12jav37otrsrhdl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDcdo0qcaiC3bxEUsGnG3z5MromX5DcRso"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "672026003621-a43ol1601t7so5gcd12jav37otrsrhdl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
