@@ -84,6 +84,7 @@ class SignUp extends StatelessWidget {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
 
                         keyboardType: TextInputType.name,
+                        controller: registerCubit.fullNameController,
                         decoration: InputDecoration(
                           hint: Text(
                             "Jane Doe",

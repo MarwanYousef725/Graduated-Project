@@ -61,7 +61,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
           ),
           onPressed: () => Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (_) => Home()),
+            MaterialPageRoute(builder: (_) => Home(index: 3)),
             (_) => false,
           ),
         ),
@@ -77,7 +77,11 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
       body: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           if (state is ProfileLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Color.fromRGBO(5, 150, 105, 1),
+              ),
+            );
           }
           final profileLoaded = state is ProfileLoaded ? state : null;
 
@@ -148,7 +152,6 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                     _dobController,
                     isReadOnly: true,
                     onTap: () {
-                      // Show date picker
                     },
                   ),
                   const SizedBox(height: 40),

@@ -1,0 +1,22 @@
+﻿Analyzing graduated_project...                                  
+
+  error - Expected a method, getter, setter or operator declaration - lib\Search & Discovery\view\home.dart:253:1 - expected_executable
+   info - Don't use 'BuildContext's across async gaps - lib\Splash Screen and Onboarding\view\splash.dart:24:11 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\Splash Screen and Onboarding\view\splash.dart:30:11 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\User Authentication\view\forget_password.dart:167:35 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\User Authentication\view\login.dart:196:43 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\User Authentication\view\login.dart:315:37 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\User Authentication\view\login.dart:322:56 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\User Authentication\view\sign_up.dart:345:37 - use_build_context_synchronously
+warning - Unused import: 'package:graduated_project/History/view/history.dart' - lib\cart_checkout\view\widgets\cart3.dart:6:8 - unused_import
+   info - Constructors for public widgets should have a named 'key' parameter - lib\cart_checkout\view\widgets\checkout.dart:12:3 - use_key_in_widget_constructors
+   info - Constructors in '@immutable' classes should be declared as 'const' - lib\cart_checkout\view\widgets\checkout.dart:12:3 - prefer_const_constructors_in_immutables
+   info - Don't use 'BuildContext's across async gaps - lib\cart_checkout\view\widgets\checkout.dart:46:25 - use_build_context_synchronously
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\cart_checkout\view\widgets\checkout.dart:319:25 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\cart_checkout\view\widgets\checkout.dart:320:25 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\profile\addresses\ui\widgets\address_card.dart:25:47 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\profile\addresses\ui\widgets\address_card.dart:28:33 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\profile\notifications\ui\widgets\notification_card.dart:21:33 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\profile\orders\ui\widgets\order_card.dart:20:33 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\profile\ui\screens\profile_screen.dart:140:33 - deprecated_member_use
+

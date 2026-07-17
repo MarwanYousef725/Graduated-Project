@@ -7,7 +7,6 @@ class NotificationsCubit extends Cubit<NotificationsState> {
 
   void loadNotifications() async {
     emit(NotificationsLoading());
-    // Simulate API call
     await Future.delayed(const Duration(milliseconds: 500));
 
     final today = [
@@ -59,6 +58,5 @@ class NotificationsCubit extends Cubit<NotificationsState> {
   }
 
   void markAllAsRead() {
-    // Implement mark all as read logic
   }
 }

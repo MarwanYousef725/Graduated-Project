@@ -7,7 +7,6 @@ class AddressesCubit extends Cubit<AddressesState> {
 
   void loadAddresses() async {
     emit(AddressesLoading());
-    // Simulate API call
     await Future.delayed(const Duration(milliseconds: 500));
 
     final addresses = [
@@ -35,6 +34,5 @@ class AddressesCubit extends Cubit<AddressesState> {
   }
 
   void deleteAddress(String id) {
-    // Implement delete logic
   }
 }

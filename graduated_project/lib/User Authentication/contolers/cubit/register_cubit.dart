@@ -9,7 +9,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
   bool isHidden1 = true;
   bool isHidden2 = true;
   RegisterCubit() : super(RegisterInitial());
@@ -25,16 +25,15 @@ class RegisterCubit extends Cubit<RegisterState> {
       if (credential.user != null && !credential.user!.emailVerified) {
         await credential.user!.sendEmailVerification();
       }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-    } catch (e) {
-      print(e);
+      FirebaseAuth.instance.currentUser!.updateProfile(
+        displayName: fullNameController.text,
+      );
+      emit(RegisterSuccess());
+    } on FirebaseAuthException catch (_) {
+      emit(RegisterError());
+    } catch (_) {
+      emit(RegisterError());
     }
-    emit(RegisterSuccess());
   }
 
   void changeCheckBox() {

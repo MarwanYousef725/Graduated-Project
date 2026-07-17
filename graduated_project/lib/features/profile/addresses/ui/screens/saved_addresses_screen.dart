@@ -38,7 +38,11 @@ class SavedAddressesScreen extends StatelessWidget {
         body: BlocBuilder<AddressesCubit, AddressesState>(
           builder: (context, state) {
             if (state is AddressesLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Color.fromRGBO(5, 150, 105, 1),
+                ),
+              );
             } else if (state is AddressesLoaded) {
               return Stack(
                 children: [
@@ -54,7 +58,7 @@ class SavedAddressesScreen extends StatelessWidget {
                               .deleteAddress(address.id),
                         ),
                       ),
-                      const SizedBox(height: 80), // Space for bottom button
+                      const SizedBox(height: 80),
                     ],
                   ),
                   Positioned(

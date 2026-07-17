@@ -25,7 +25,6 @@ class SplashCubit extends Cubit<SplashState> {
     emit(SplashLoading(progress: progress));
 
     await Future.delayed(const Duration(seconds: 1));
-    emit(SplashLoaded());
   }
 
   void nextPage(int value) {

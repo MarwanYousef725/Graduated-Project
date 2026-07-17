@@ -37,7 +37,6 @@ class NotificationsScreen extends StatelessWidget {
               ),
               actions: [
                 TextButton(
-                  // هنا استخدمنا الـ innerContext الجديد الشايف الـ Cubit بنجاح
                   onPressed: () =>
                       innerContext.read<NotificationsCubit>().markAllAsRead(),
                   child: const Text(
@@ -51,11 +50,14 @@ class NotificationsScreen extends StatelessWidget {
                 const SizedBox(width: 8),
               ],
             ),
-            // الـ BlocBuilder مش هيحتاج تغيير لأنه كدة كدة بيبني Context داخلي تلقائيًا
             body: BlocBuilder<NotificationsCubit, NotificationsState>(
               builder: (context, state) {
                 if (state is NotificationsLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Color.fromRGBO(5, 150, 105, 1),
+                    ),
+                  );
                 } else if (state is NotificationsLoaded) {
                   return ListView(
                     padding: const EdgeInsets.symmetric(

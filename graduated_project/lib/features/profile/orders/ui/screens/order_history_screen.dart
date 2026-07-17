@@ -37,7 +37,11 @@ class OrderHistoryScreen extends StatelessWidget {
         body: BlocBuilder<OrdersCubit, OrdersState>(
           builder: (context, state) {
             if (state is OrdersLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Color.fromRGBO(5, 150, 105, 1),
+                ),
+              );
             } else if (state is OrdersLoaded) {
               return ListView.builder(
                 padding: const EdgeInsets.all(20),

@@ -17,19 +17,13 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -57,6 +51,28 @@ class DefaultFirebaseOptions {
     appId: '1:672026003621:android:f5f2d6b221d46b0d98e54c',
     messagingSenderId: '672026003621',
     projectId: 'depigraduationproject',
+    databaseURL: 'https://depigraduationproject-default-rtdb.firebaseio.com',
     storageBucket: 'depigraduationproject.firebasestorage.app',
+  );
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAKp4LeHyAOq6B3j7N2BEE6mbaB0hBa5po',
+    appId: '1:672026003621:web:7a45e3491cc3bcb298e54c',
+    messagingSenderId: '672026003621',
+    projectId: 'depigraduationproject',
+    authDomain: 'depigraduationproject.firebaseapp.com',
+    databaseURL: 'https://depigraduationproject-default-rtdb.firebaseio.com',
+    storageBucket: 'depigraduationproject.firebasestorage.app',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyD4XzuwBKLxZANV0u_R_YCSB2LJd85Hv6Y',
+    appId: '1:672026003621:ios:8c56b5cbe549db8898e54c',
+    messagingSenderId: '672026003621',
+    projectId: 'depigraduationproject',
+    databaseURL: 'https://depigraduationproject-default-rtdb.firebaseio.com',
+    storageBucket: 'depigraduationproject.firebasestorage.app',
+    androidClientId: '672026003621-2h2it4e3uljisdfg0u7gtnmr9efumdhu.apps.googleusercontent.com',
+    iosClientId: '672026003621-l4meqb7m1f2h95mskcde1m0qf9uf1ii4.apps.googleusercontent.com',
+    iosBundleId: 'com.example.graduatedProject',
   );
 }

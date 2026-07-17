@@ -14,10 +14,10 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
         email: emailController.text.trim(),
       );
       emit(ForgetPasswordSuccess());
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      }
+    } on FirebaseAuthException catch (_) {
+      emit(ForgetPasswordError());
+    } catch (_) {
+      emit(ForgetPasswordError());
     }
   }
 }

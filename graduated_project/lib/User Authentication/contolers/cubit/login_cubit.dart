@@ -19,41 +19,44 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoading());
 
     try {
-      if (FirebaseAuth.instance.currentUser != null &&
-          FirebaseAuth.instance.currentUser!.emailVerified) {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-        );
-      }
-      emit(LoginSuccess());
-    } on FirebaseAuthException catch (e) {
-      emit(LoginInitial());
-
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided.');
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      if (credential.user != null && credential.user!.emailVerified) {
+        emit(LoginSuccess());
       } else {
-        print(e.message);
+        emit(LoginError());
       }
-    } catch (e) {
-      emit(LoginInitial());
-      print(e);
+    } on FirebaseAuthException catch (_) {
+      emit(LoginError());
+    } catch (_) {
+      emit(LoginError());
     }
   }
 
   Future<UserCredential?> signInWithGoogle() async {
-    final GoogleSignIn googleSignIn = GoogleSignIn();
-    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-    if (googleUser == null) return null;
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      if (googleUser == null) {
+        print("Google Sign-In Aborted");
+        return null;
+      }
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      print("Firebase Auth Error: ${e.message}");
+      return null;
+    } catch (e) {
+      print("General Error during Google Sign-In: $e");
+      return null;
+    }
   }
 
   void changePasswordVisibility() {

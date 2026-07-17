@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +15,8 @@ class BuildAddButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
+          .collection('Users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('Cart_Products')
           .where("id", isEqualTo: item.id)
           .snapshots(),
@@ -23,7 +26,14 @@ class BuildAddButton extends StatelessWidget {
           return const SizedBox();
         }
 
-        int quantity = snapshot.data!.docs.length;
+        int quantity = 0;
+        for (var doc in snapshot.data!.docs) {
+          quantity +=
+              PharmacyProducts.fromJson(
+                doc.data() as Map<String, dynamic>,
+              ).quantity ??
+              0;
+        }
         return GestureDetector(
           onTap: item.isInStock || item.isLowStock
               ? () {

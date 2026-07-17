@@ -22,7 +22,7 @@ class _SplashState extends State<Splash> {
       if (FirebaseAuth.instance.currentUser != null) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => Home()),
+          MaterialPageRoute(builder: (context) => Home(index: 0)),
           (route) => false,
         );
       } else {

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +11,7 @@ import 'package:graduated_project/Search%20&%20Discovery/view/search.dart';
 import 'package:graduated_project/Search%20&%20Discovery/widgets/category_name_above_products.dart';
 import 'package:graduated_project/Search%20&%20Discovery/widgets/column_product_card.dart';
 import 'package:graduated_project/Search%20&%20Discovery/widgets/row_product_card.dart';
+import 'package:graduated_project/features/profile/notifications/ui/screens/notifications_screen.dart';
 
 class HomePage extends StatelessWidget {
   final List<Map<String, dynamic>> categories = [
@@ -30,6 +30,18 @@ class HomePage extends StatelessWidget {
       create: (context) => ProductCubit()..fetchProducts(),
       child: BlocBuilder<ProductCubit, ProductState>(
         builder: (context, state) {
+          if (state is ProductLoading) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Color.fromRGBO(5, 150, 105, 1),
+              ),
+            );
+          }
+          final cubit = context.read<ProductCubit>();
+
+          if (cubit.products.isEmpty) {
+            return const Center(child: Text("No products found"));
+          }
           return ListView(
             children: [
               Container(
@@ -64,7 +76,7 @@ class HomePage extends StatelessWidget {
                               style: GoogleFonts.inter(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12.dg,
-                                color: Color.fromRGBO(107, 114, 128, 1),
+                                color: const Color.fromRGBO(107, 114, 128, 1),
                               ),
                             ),
                             PopupMenuButton<String>(
@@ -78,7 +90,12 @@ class HomePage extends StatelessWidget {
                                     style: GoogleFonts.inter(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 14.dg,
-                                      color: Color.fromRGBO(17, 24, 39, 1),
+                                      color: const Color.fromRGBO(
+                                        17,
+                                        24,
+                                        39,
+                                        1,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -90,12 +107,17 @@ class HomePage extends StatelessWidget {
                                     style: GoogleFonts.inter(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 12.dg,
-                                      color: Color.fromRGBO(45, 159, 117, 1),
+                                      color: const Color.fromRGBO(
+                                        45,
+                                        159,
+                                        117,
+                                        1,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ],
-                              offset: Offset(0, 30),
+                              offset: const Offset(0, 30),
                               onSelected: (value) {
                                 if (value == 'edit') {
                                   log("Navigate to Edit Address");
@@ -112,14 +134,24 @@ class HomePage extends StatelessWidget {
                                       style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 14.dg,
-                                        color: Color.fromRGBO(17, 24, 39, 1),
+                                        color: const Color.fromRGBO(
+                                          17,
+                                          24,
+                                          39,
+                                          1,
+                                        ),
                                       ),
                                     ),
                                   ),
                                   Icon(
                                     Icons.keyboard_arrow_down,
                                     size: 16.dg,
-                                    color: Color.fromRGBO(45, 159, 117, 1),
+                                    color: const Color.fromRGBO(
+                                      45,
+                                      159,
+                                      117,
+                                      1,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -127,13 +159,22 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                         GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const NotificationsScreen(),
+                              ),
+                            );
+                          },
                           child: Stack(
                             children: [
                               Container(
                                 height: 40.dg,
                                 width: 40.dg,
-                                padding: EdgeInsets.all(8),
-                                decoration: BoxDecoration(
+                                padding: const EdgeInsets.all(8),
+                                decoration: const BoxDecoration(
                                   color: Color.fromRGBO(243, 244, 246, 1),
                                   shape: BoxShape.circle,
                                 ),
@@ -155,7 +196,7 @@ class HomePage extends StatelessWidget {
                                       width: 2.dg,
                                     ),
                                     shape: BoxShape.circle,
-                                    color: Color.fromRGBO(239, 68, 68, 1),
+                                    color: const Color.fromRGBO(239, 68, 68, 1),
                                   ),
                                 ),
                               ),
@@ -164,7 +205,6 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(
@@ -179,7 +219,7 @@ class HomePage extends StatelessWidget {
                           right: 12,
                         ),
                         decoration: BoxDecoration(
-                          color: Color.fromRGBO(243, 244, 246, 1),
+                          color: const Color.fromRGBO(243, 244, 246, 1),
                           borderRadius: BorderRadius.circular(12.dg),
                         ),
                         child: Row(
@@ -191,16 +231,14 @@ class HomePage extends StatelessWidget {
                               height: 24.dg,
                             ),
                             Expanded(
-                              child: SizedBox(
-                                child: Text(
-                                  "Search medicines, health products...",
-                                  style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16.dg,
-                                    color: Color.fromRGBO(107, 114, 128, 1),
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
+                              child: Text(
+                                "Search medicines, health products...",
+                                style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16.dg,
+                                  color: const Color.fromRGBO(107, 114, 128, 1),
                                 ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
@@ -211,17 +249,17 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 24.dg),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ProductsView()),
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: GestureDetector(
-                    child: Image.asset("assets/images/offer.png"),
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ProductsView(),
+                      ),
+                    );
+                  },
+                  child: Image.asset("assets/images/offer.png"),
                 ),
               ),
               SizedBox(height: 32.dg),
@@ -229,80 +267,75 @@ class HomePage extends StatelessWidget {
                 categoryName: "Categories",
                 howToShow: "Vee All",
                 onTapped: () {
-                  Navigator.of(
-                    context,
-                  ).push(MaterialPageRoute(builder: (context) => Category()));
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Category()),
+                  );
                 },
               ),
-
               SizedBox(height: 16.dg),
-
-              BlocProvider(
-                create: (context) => ProductCubit()..fetchProducts(),
-                child: BlocBuilder<ProductCubit, ProductState>(
-                  builder: (context, state) {
-                    if (state is ProductLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    return SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          SizedBox(width: 20.dg),
-
-                          Row(
-                            spacing: 16.dg,
-                            children: List.generate(categories.length, (index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => CategoriesDetails(
-                                        product: context
-                                            .read<ProductCubit>()
-                                            .products[index]
-                                            .category!,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Column(
-                                  spacing: 8.dg,
-                                  children: [
-                                    Image.asset(
-                                      categories[index]["image"],
-                                      width: 64,
-                                      height: 64,
-                                    ),
-                                    SizedBox(
-                                      width: 64.dg,
-                                      child: Text(
-                                        textAlign: TextAlign.center,
-                                        context
-                                            .read<ProductCubit>()
-                                            .products[index]
-                                            .category!,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 10.dg,
-                                          color: Color.fromRGBO(17, 24, 39, 1),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    SizedBox(width: 20.dg),
+                    Row(
+                      spacing: 16.dg,
+                      children: List.generate(
+                        categories.length < cubit.products.length
+                            ? categories.length
+                            : cubit.products.length,
+                        (index) {
+                          if (index >= cubit.products.length) {
+                            return const SizedBox();
+                          }
+                          final productCategory =
+                              cubit.products[index].category ?? "Unknown";
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CategoriesDetails(
+                                    product: productCategory,
+                                  ),
                                 ),
                               );
-                            }),
-                          ),
-                          SizedBox(width: 20.dg),
-                        ],
+                            },
+                            child: Column(
+                              spacing: 8.dg,
+                              children: [
+                                Image.asset(
+                                  categories[index]["image"],
+                                  width: 64,
+                                  height: 64,
+                                ),
+                                SizedBox(
+                                  width: 64.dg,
+                                  child: Text(
+                                    textAlign: TextAlign.center,
+                                    productCategory,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10.dg,
+                                      color: const Color.fromRGBO(
+                                        17,
+                                        24,
+                                        39,
+                                        1,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                    SizedBox(width: 20.dg),
+                  ],
                 ),
               ),
               SizedBox(height: 32.dg),
@@ -311,24 +344,28 @@ class HomePage extends StatelessWidget {
                 howToShow: "See All",
                 onTapped: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ProductsView()),
+                    MaterialPageRoute(
+                      builder: (context) => const ProductsView(),
+                    ),
                   );
                 },
               ),
               SizedBox(height: 16.dg),
-              ColumnProductCard(),
+              const ColumnProductCard(),
               SizedBox(height: 32.dg),
               CategoryNameAboveProducts(
                 categoryName: "Pain Relief",
                 howToShow: "See All",
                 onTapped: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ProductsView()),
+                    MaterialPageRoute(
+                      builder: (context) => const ProductsView(),
+                    ),
                   );
                 },
               ),
               SizedBox(height: 16.dg),
-              RowProductCard(),
+              const RowProductCard(),
               SizedBox(height: 32.dg),
             ],
           );

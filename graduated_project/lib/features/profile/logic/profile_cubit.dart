@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 part 'profile_state.dart';
 
@@ -8,7 +9,6 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void loadProfile() async {
     emit(ProfileLoading());
-    // Simulate API call
     await Future.delayed(const Duration(seconds: 1));
     emit(
       ProfileLoaded(
@@ -55,11 +55,6 @@ class ProfileCubit extends Cubit<ProfileState> {
       final XFile? image = await _picker.pickImage(source: ImageSource.camera);
 
       if (image != null) {
-        emit(ProfileLoading());
-        FirebaseAuth.instance.currentUser!.updateProfile(
-          displayName: FirebaseAuth.instance.currentUser!.displayName,
-          photoURL: image.path,
-        );
         emit(
           ProfileLoaded(
             name: FirebaseAuth.instance.currentUser!.displayName ?? '',
@@ -67,7 +62,7 @@ class ProfileCubit extends Cubit<ProfileState> {
             gender: currentState.gender,
             dob: currentState.dob,
             notificationCount: currentState.notificationCount,
-            profileImage: FirebaseAuth.instance.currentUser!.photoURL,
+            profileImage: image.path,
           ),
         );
       }
@@ -75,6 +70,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   void logout() {
-    // Logic to logout
+    FirebaseAuth.instance.signOut();
+    GoogleSignIn().signOut();
   }
 }

@@ -1,56 +1,61 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:graduated_project/Search%20&%20Discovery/contolers/cubit/product_cubit.dart';
 import 'package:graduated_project/Search%20&%20Discovery/models/product_model.dart';
 import 'package:graduated_project/Search%20&%20Discovery/view/product_details.dart';
+// import 'package:graduated_project/Search%20&%20Discovery/widgets/build_add_button.dart';
+import 'package:graduated_project/cart_checkout/view/widgets/build_add_to_cart.dart';
 
-class ProductCard extends StatelessWidget {
-  final PharmacyProducts product;
-
-  const ProductCard({super.key, required this.product});
+class BuildProductCard extends StatelessWidget {
+  final PharmacyProducts item;
+  final BuildContext context;
+  const BuildProductCard({
+    super.key,
+    required this.item,
+    required this.context,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final productImages = item.images;
+    final fallbackImage = (productImages != null && productImages.isNotEmpty)
+        ? productImages[0]
+        : '';
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProductDetails(product: product),
+            builder: (context) => ProductDetails(product: item),
           ),
         );
       },
       child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
-        padding: const EdgeInsets.all(16),
+        margin: EdgeInsets.only(bottom: 12.dg),
+        padding: EdgeInsets.all(12.dg),
+        // height: 120.dg,
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(
-            width: 1.dg,
-            color: Color.fromRGBO(241, 245, 249, 1),
-          ),
           borderRadius: BorderRadius.circular(12.dg),
-          boxShadow: [
+          border: Border.all(color: const Color.fromRGBO(243, 244, 246, 1)),
+          boxShadow: const [
             BoxShadow(
-              color: const Color.fromRGBO(0, 0, 0, 0.05),
-              offset: const Offset(0, 1),
+              color: Color.fromRGBO(0, 0, 0, 0.05),
+              offset: Offset(0, 1),
               blurRadius: 2,
             ),
           ],
         ),
         child: Row(
-          spacing: 16.dg,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.dg),
               child: CachedNetworkImage(
-                imageUrl: product.images![0],
-                width: 96.dg,
-                height: 96.dg,
+                imageUrl: fallbackImage,
+                width: 80.dg,
+                height: 80.dg,
+                fit: BoxFit.cover,
                 errorWidget: (context, error, stackTrace) {
                   return Container(
                     alignment: Alignment.center,
@@ -61,202 +66,61 @@ class ProductCard extends StatelessWidget {
                     ),
                   );
                 },
-                placeholder: (context, url) =>
-                    Center(child: CircularProgressIndicator()),
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(
+                    color: Color.fromRGBO(5, 150, 105, 1),
+                  ),
+                ),
               ),
             ),
+            SizedBox(width: 12.dg),
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 8.dg,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    width: 200.dg,
-                    child: Text(
-                      product.name!,
-                      maxLines: 2,
-                      style: GoogleFonts.inter(
-                        fontSize: 16.dg,
-                        fontWeight: FontWeight.w600,
-                        color: const Color.fromRGBO(30, 41, 59, 1),
-                      ),
+                  Text(
+                    item.category.toString().toUpperCase(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 10.dg,
+                      color: const Color(0xFF2D9F75),
                     ),
                   ),
                   Text(
-                    "${product.packSize}",
+                    item.name ?? "",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.inter(
-                      fontSize: 12.dg,
-                      fontWeight: FontWeight.w400,
-                      color: const Color.fromRGBO(100, 116, 139, 1),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14.dg,
                     ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 6.dg,
-                    children: [
-                      Container(
-                        width: 6.dg,
-                        height: 6.dg,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: (product.isInStock)
-                              ? Color.fromRGBO(45, 159, 117, 1)
-                              : product.isLowStock
-                              ? Color.fromRGBO(159, 148, 45, 1)
-                              : Color.fromRGBO(159, 45, 45, 1),
-                        ),
-                      ),
-                      Text(
-                        (product.isInStock)
-                            ? "IN STOCK"
-                            : (product.isLowStock)
-                            ? "LOW STOCK"
-                            : "OUT OF STOCK",
-                        style: GoogleFonts.inter(
-                          fontSize: 12.dg,
-                          fontWeight: FontWeight.w500,
-                          color: (product.isInStock)
-                              ? Color.fromRGBO(45, 159, 117, 1)
-                              : product.isLowStock
-                              ? Color.fromRGBO(159, 148, 45, 1)
-                              : Color.fromRGBO(159, 45, 45, 1),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    item.description ?? "",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12.dg,
+                      color: Colors.grey,
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "\$${product.priceUsd}",
+                        "\$${item.priceUsd ?? 0.0}",
                         style: GoogleFonts.inter(
-                          fontSize: 18.dg,
                           fontWeight: FontWeight.w700,
-                          color: const Color.fromRGBO(15, 23, 42, 1),
+                          fontSize: 16.dg,
+                          color: Colors.black,
                         ),
                       ),
-                      StreamBuilder<QuerySnapshot>(
-                        stream: FirebaseFirestore.instance
-                            .collection('Cart_Products')
-                            .where("id", isEqualTo: product.id)
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) return const SizedBox();
-
-                          int quantity = snapshot.data!.docs.length;
-
-                          return Container(
-                            height: 32.dg,
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(164, 253, 220, 0.322),
-
-                              borderRadius: BorderRadius.circular(12.dg),
-                              border: Border.all(
-                                color: Color.fromRGBO(45, 159, 117, 1),
-                                width: 1.dg,
-                              ),
-                            ),
-                            child: quantity > 0
-                                ? Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0,
-                                    ),
-                                    child: Row(
-                                      spacing: 20.dg,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () => context
-                                              .read<ProductCubit>()
-                                              .removeProductFromCart(
-                                                product.id!,
-                                              ),
-                                          child: Icon(
-                                            Icons.remove,
-                                            color: Color(0xFF2D9F75),
-                                            size: 18.dg,
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 6.dg,
-                                            vertical: 2.dg,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: Color.fromRGBO(
-                                              45,
-                                              159,
-                                              117,
-                                              1,
-                                            ),
-
-                                            borderRadius: BorderRadius.circular(
-                                              8.dg,
-                                            ),
-                                          ),
-                                          child: Text(
-                                            "$quantity",
-                                            style: TextStyle(
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () => context
-                                              .read<ProductCubit>()
-                                              .addProductToCart(product),
-                                          child: Icon(
-                                            Icons.add,
-                                            color: Color.fromRGBO(
-                                              45,
-                                              159,
-                                              117,
-                                              1,
-                                            ),
-                                            size: 18.dg,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      backgroundColor: Color.fromRGBO(
-                                        45,
-                                        159,
-                                        117,
-                                        1,
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          12.dg,
-                                        ),
-                                      ),
-                                    ),
-                                    onPressed:
-                                        product.isInStock || product.isLowStock
-                                        ? () => context
-                                              .read<ProductCubit>()
-                                              .addProductToCart(product)
-                                        : null,
-                                    child: Text(
-                                      "Add to Cart",
-                                      style: GoogleFonts.inter(
-                                        fontSize: 14.dg,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                          );
-                        },
-                      ),
+                      BuildAddToCart(item: item),
                     ],
                   ),
                 ],

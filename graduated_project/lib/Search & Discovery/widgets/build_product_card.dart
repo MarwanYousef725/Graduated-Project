@@ -68,8 +68,11 @@ class BuildProductCard extends StatelessWidget {
                       ),
                     );
                   },
-                  placeholder: (context, url) =>
-                      Center(child: CircularProgressIndicator()),
+                  placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(
+                      color: Color.fromRGBO(5, 150, 105, 1),
+                    ),
+                  ),
                 ),
               ),
               SizedBox(width: 12.dg),

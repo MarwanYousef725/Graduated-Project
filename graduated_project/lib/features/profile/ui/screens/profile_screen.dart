@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduated_project/Search%20&%20Discovery/view/home.dart';
+import 'package:graduated_project/User%20Authentication/view/login.dart';
 import 'package:graduated_project/core/theme/app_colors.dart';
 import 'package:graduated_project/features/profile/addresses/ui/screens/saved_addresses_screen.dart';
 import 'package:graduated_project/features/profile/logic/profile_cubit.dart';
 import 'package:graduated_project/features/profile/notifications/ui/screens/notifications_screen.dart';
-import 'package:graduated_project/features/profile/orders/ui/screens/order_history_screen.dart';
 import 'package:graduated_project/features/profile/ui/screens/personal_info_screen.dart';
 import 'package:graduated_project/features/profile/ui/widgets/profile_menu_item.dart';
 
@@ -23,7 +24,11 @@ class ProfileScreen extends StatelessWidget {
         child: BlocBuilder<ProfileCubit, ProfileState>(
           builder: (context, state) {
             if (state is ProfileLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Color.fromRGBO(5, 150, 105, 1),
+                ),
+              );
             } else if (state is ProfileLoaded) {
               return SingleChildScrollView(
                 child: Column(
@@ -180,9 +185,7 @@ class ProfileScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const OrderHistoryScreen(),
-                ),
+                MaterialPageRoute(builder: (context) => Home(index: 2)),
               );
             },
           ),
@@ -209,7 +212,14 @@ class ProfileScreen extends StatelessWidget {
             icon: Icons.logout,
             title: 'Logout',
             isLogout: true,
-            onTap: () => context.read<ProfileCubit>().logout(),
+            onTap: () {
+              context.read<ProfileCubit>().logout();
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const Login()),
+                (route) => false,
+              );
+            },
           ),
         ],
       ),

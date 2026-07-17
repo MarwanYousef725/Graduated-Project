@@ -7,7 +7,6 @@ class OrdersCubit extends Cubit<OrdersState> {
 
   void loadOrders() async {
     emit(OrdersLoading());
-    // Simulate API call
     await Future.delayed(const Duration(milliseconds: 600));
 
     final orders = [

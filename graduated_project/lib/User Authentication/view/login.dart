@@ -195,7 +195,7 @@ class Login extends StatelessWidget {
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (_) => Home(),
+                                            builder: (_) => Home(index: 0),
                                           ),
                                           (route) => false,
                                         );
@@ -306,14 +306,12 @@ class Login extends StatelessWidget {
                             GestureDetector(
                               onTap: () async {
                                 await loginCubit.signInWithGoogle();
-                                if (FirebaseAuth.instance.currentUser != null ||
-                                    FirebaseAuth
-                                        .instance
-                                        .currentUser!
-                                        .emailVerified) {
+                                if (FirebaseAuth.instance.currentUser != null) {
                                   Navigator.pushAndRemoveUntil(
                                     context,
-                                    MaterialPageRoute(builder: (_) => Home()),
+                                    MaterialPageRoute(
+                                      builder: (_) => Home(index: 0),
+                                    ),
                                     (route) => false,
                                   );
                                 } else {

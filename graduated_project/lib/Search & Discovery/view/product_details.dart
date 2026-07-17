@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,6 +51,8 @@ class ProductDetails extends StatelessWidget {
                     ),
                     StreamBuilder(
                       stream: FirebaseFirestore.instance
+                          .collection('Users')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
                           .collection('Fav_Products')
                           .where("id", isEqualTo: product.id)
                           .snapshots(),
@@ -122,8 +125,11 @@ class ProductDetails extends StatelessWidget {
                         ),
                       );
                     },
-                    placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
+                    placeholder: (context, url) => Center(
+                      child: CircularProgressIndicator(
+                        color: Color.fromRGBO(5, 150, 105, 1),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -368,13 +374,22 @@ class ProductDetails extends StatelessWidget {
                 ),
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
+                      .collection('Users')
+                      .doc(FirebaseAuth.instance.currentUser?.uid)
                       .collection('Cart_Products')
                       .where("id", isEqualTo: product.id)
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) return const SizedBox();
 
-                    int quantity = snapshot.data!.docs.length;
+                    int quantity = 0;
+                    for (var doc in snapshot.data!.docs) {
+                      quantity +=
+                          PharmacyProducts.fromJson(
+                            doc.data() as Map<String, dynamic>,
+                          ).quantity ??
+                          0;
+                    }
 
                     return Container(
                       width: double.infinity,
@@ -395,7 +410,7 @@ class ProductDetails extends StatelessWidget {
                                 IconButton(
                                   onPressed: () => context
                                       .read<ProductCubit>()
-                                      .removeProductFromCart(product.id!),
+                                      .decreaseQuantity(product.id!),
                                   icon: Icon(
                                     Icons.remove,
                                     color: Color(0xFF2D9F75),
@@ -444,7 +459,7 @@ class ProductDetails extends StatelessWidget {
                                     padding: EdgeInsets.only(left: 16.dg),
                                     onPressed: () => context
                                         .read<ProductCubit>()
-                                        .removeAll(product.id!),
+                                        .removeProductFromCart(product.id!),
                                     icon: Icon(
                                       Icons.delete_outline_rounded,
                                       color: Colors.redAccent.shade700,

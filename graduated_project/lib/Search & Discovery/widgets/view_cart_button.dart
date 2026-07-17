@@ -1,16 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:graduated_project/Search%20&%20Discovery/contolers/cubit/product_cubit.dart';
+// import 'package:graduated_project/Search%20&%20Discovery/contolers/cubit/product_cubit.dart';
 import 'package:graduated_project/Search%20&%20Discovery/models/product_model.dart';
+import 'package:graduated_project/Search%20&%20Discovery/view/home.dart';
 
 class ViewCartButton extends StatelessWidget {
   const ViewCartButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+
+    if (userId.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
     return Container(
       padding: EdgeInsets.only(
         left: 16.dg,
@@ -29,27 +37,30 @@ class ViewCartButton extends StatelessWidget {
       ),
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
+            .collection("Users")
+            .doc(userId)
             .collection("Cart_Products")
             .snapshots(),
         builder: (context, snapShot) {
-          if (snapShot.hasData) {
-            List<PharmacyProducts> products = snapShot.data!.docs
-                .map(
-                  (doc) => PharmacyProducts.fromJson(
-                    doc.data() as Map<String, dynamic>,
-                  ),
-                )
-                .toList();
-            context.read<ProductCubit>().calculateTotalPrice(products);
-          }
-          int cartCount = 0;
           if (snapShot.hasError) {
             return Center(child: Text("Error: ${snapShot.error}"));
           }
 
-          if (snapShot.hasData) {
-            cartCount = snapShot.data!.docs.length;
+          int cartCount = 0;
+          double localTotalPrice = 0.0;
+
+          if (snapShot.hasData && snapShot.data != null) {
+            for (var doc in snapShot.data!.docs) {
+              final data = doc.data() as Map<String, dynamic>?;
+              if (data != null) {
+                final product = PharmacyProducts.fromJson(data);
+                final quantity = product.quantity ?? 0;
+                cartCount += quantity;
+                localTotalPrice += ((product.priceUsd) ?? 0.0) * quantity;
+              }
+            }
           }
+
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -59,14 +70,14 @@ class ViewCartButton extends StatelessWidget {
                   Stack(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Color.fromRGBO(234, 246, 241, 1),
+                          color: const Color.fromRGBO(234, 246, 241, 1),
                           borderRadius: BorderRadius.circular(12.dg),
                         ),
                         child: Image.asset(
                           "assets/images/cart.png",
-                          color: Color.fromRGBO(45, 159, 117, 1),
+                          color: const Color.fromRGBO(45, 159, 117, 1),
                           width: 18.dg,
                           height: 18.dg,
                         ),
@@ -77,7 +88,7 @@ class ViewCartButton extends StatelessWidget {
                         child: Container(
                           width: 16.dg,
                           height: 16.dg,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color.fromRGBO(239, 68, 68, 1),
                             shape: BoxShape.circle,
                           ),
@@ -95,7 +106,6 @@ class ViewCartButton extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -104,15 +114,15 @@ class ViewCartButton extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 12.dg,
                           fontWeight: FontWeight.w600,
-                          color: Color.fromRGBO(100, 116, 139, 1),
+                          color: const Color.fromRGBO(100, 116, 139, 1),
                         ),
                       ),
                       Text(
-                        "\$${context.read<ProductCubit>().totalPrice}",
+                        "\$${localTotalPrice.toStringAsFixed(2)}",
                         style: GoogleFonts.inter(
                           fontSize: 14.dg,
                           fontWeight: FontWeight.w700,
-                          color: Color.fromRGBO(30, 41, 59, 1),
+                          color: const Color.fromRGBO(30, 41, 59, 1),
                         ),
                       ),
                     ],
@@ -126,12 +136,18 @@ class ViewCartButton extends StatelessWidget {
                     horizontal: 24,
                     vertical: 10.dg,
                   ),
-                  backgroundColor: Color.fromRGBO(15, 23, 42, 1),
+                  backgroundColor: const Color.fromRGBO(15, 23, 42, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.dg),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home(index: 1)),
+                    (route) => false,
+                  );
+                },
                 child: Text(
                   "View Cart",
                   style: GoogleFonts.inter(
