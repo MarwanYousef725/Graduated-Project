@@ -108,7 +108,7 @@ Screens captured from the running Android build. Paths are relative to this repo
 ### Launch and onboarding
 
 <p align="center">
-  <img src="[docs/screenshots/01_splash.png](https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205515_%D9%8DSmartPharmacy.png)" width="180" alt="Splash">
+  <img src="https://raw.githubusercontent.com/MarwanYousef725/Graduated-Project/refs/heads/master/assets/screenshots/Screenshot_20260922-205515_%D9%8DSmartPharmacy.png" width="180" alt="Splash">
   <img src="docs/screenshots/02_onboarding_find_medicine.png" width="180" alt="Onboarding — find medicine">
   <img src="docs/screenshots/03_onboarding_delivery.png" width="180" alt="Onboarding — delivery">
 </p>
