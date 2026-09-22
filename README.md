@@ -93,7 +93,7 @@ Add a walkthrough video (screen recording of the shopping flow) and replace the 
 </p>
 
 <p align="center">
-  <strong><a href="YOUR_VIDEO_LINK_HERE">▶ Watch SmartPharmacy Demo</a></strong><br>
+  <strong><a href="https://youtube.com/shorts/Fifx0mXGHts">▶ Watch SmartPharmacy Demo</a></strong><br>
   <sub>Replace <code>YOUR_VIDEO_LINK_HERE</code> with a YouTube, Google Drive, or GitHub-hosted video URL.</sub>
 </p>
 
