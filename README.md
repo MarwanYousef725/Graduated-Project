@@ -485,7 +485,7 @@ No `LICENSE` file is present. All rights remain with the authors until a license
 
 **Marwan Yousef** — primary commit author on this repository (`marwanyousef`).
 
-Additional commits: **Abdulrahman** (`Abdulrahman2555`).
+Additional commits: **Abdulrahman** (`Abdulrahman2555`) , **Fadi Atef** (`FadiAtef`) 
 
 ---
 
