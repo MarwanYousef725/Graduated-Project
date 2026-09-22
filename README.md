@@ -87,8 +87,8 @@ This is an **academic / portfolio project**, not a licensed pharmacy or a produc
 Add a walkthrough video (screen recording of the shopping flow) and replace the link below.
 
 <p align="center">
-  <a href="YOUR_VIDEO_LINK_HERE">
-    <img src="docs/screenshots/01_splash.png" width="220" alt="SmartPharmacy splash — tap to watch demo">
+  <a href="https://youtube.com/shorts/Fifx0mXGHts">
+    <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205515_%D9%8DSmartPharmacy.png?raw=true" width="220" alt="SmartPharmacy splash — tap to watch demo">
   </a>
 </p>
 
@@ -486,14 +486,6 @@ No `LICENSE` file is present. All rights remain with the authors until a license
 **Marwan Yousef** — primary commit author on this repository (`marwanyousef`).
 
 Additional commits: **Abdulrahman** (`Abdulrahman2555`).
-
-```text
-Email:          YOUR_PUBLIC_EMAIL_HERE
-GitHub:         YOUR_GITHUB_PROFILE_HERE
-LinkedIn:       YOUR_LINKEDIN_URL_HERE
-```
-
-Replace the placeholders with the profiles you want on GitHub. Do not commit private credentials.
 
 ---
 
