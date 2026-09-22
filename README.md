@@ -109,8 +109,8 @@ Screens captured from the running Android build. Paths are relative to this repo
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/MarwanYousef725/Graduated-Project/refs/heads/master/assets/screenshots/Screenshot_20260922-205515_%D9%8DSmartPharmacy.png" width="180" alt="Splash">
-  <img src="docs/screenshots/02_onboarding_find_medicine.png" width="180" alt="Onboarding — find medicine">
-  <img src="docs/screenshots/03_onboarding_delivery.png" width="180" alt="Onboarding — delivery">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205526_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Onboarding — find medicine">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205529_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Onboarding — delivery">
 </p>
 
 <p align="center"><sub>Splash · Find Your Medicine · Fast Doorstep Delivery</sub></p>
@@ -118,9 +118,9 @@ Screens captured from the running Android build. Paths are relative to this repo
 ### Authentication
 
 <p align="center">
-  <img src="docs/screenshots/04_login.png" width="180" alt="Login">
-  <img src="docs/screenshots/05_register.png" width="180" alt="Register">
-  <img src="docs/screenshots/06_forget_password.png" width="180" alt="Forgot password">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205534_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Login">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205538_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Register">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205543_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Forgot password">
 </p>
 
 <p align="center"><sub>Sign in · Create account · Password reset</sub></p>
@@ -128,17 +128,17 @@ Screens captured from the running Android build. Paths are relative to this repo
 ### Browse and catalog
 
 <p align="center">
-  <img src="docs/screenshots/07_home.png" width="180" alt="Home">
-  <img src="docs/screenshots/09_categories.png" width="180" alt="Categories">
-  <img src="docs/screenshots/10_search.png" width="180" alt="Search">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205610_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Home">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205800_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Categories">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205700_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Search">
 </p>
 
 <p align="center"><sub>Home · Categories · Search results</sub></p>
 
 <p align="center">
-  <img src="docs/screenshots/11_products.png" width="180" alt="Products">
-  <img src="docs/screenshots/12_product_details.png" width="180" alt="Product details">
-  <img src="docs/screenshots/08_home_item_added.png" width="180" alt="Home after adding to cart">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205710_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Products">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205717_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Product details">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205729_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Home after adding to cart">
 </p>
 
 <p align="center"><sub>Product list · Medicine details · Home with cart badge</sub></p>
@@ -146,16 +146,16 @@ Screens captured from the running Android build. Paths are relative to this repo
 ### Cart, checkout, and orders
 
 <p align="center">
-  <img src="docs/screenshots/13_cart_empty.png" width="180" alt="Empty cart">
-  <img src="docs/screenshots/14_cart.png" width="180" alt="Cart with items">
-  <img src="docs/screenshots/15_checkout.png" width="180" alt="Checkout">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205621_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Empty cart">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205733_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Cart with items">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205737_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Checkout">
 </p>
 
 <p align="center"><sub>Empty cart · Cart with quantity controls · Checkout</sub></p>
 
 <p align="center">
-  <img src="docs/screenshots/16_order_success.png" width="180" alt="Order success">
-  <img src="docs/screenshots/17_orders.png" width="180" alt="Order history">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205745_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Order success">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205749_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Order history">
 </p>
 
 <p align="center"><sub>Order placed · Orders tab</sub></p>
@@ -163,9 +163,9 @@ Screens captured from the running Android build. Paths are relative to this repo
 ### Profile
 
 <p align="center">
-  <img src="docs/screenshots/18_profile.png" width="180" alt="Profile">
-  <img src="docs/screenshots/19_personal_info.png" width="180" alt="Personal information">
-  <img src="docs/screenshots/20_saved_addresses.png" width="180" alt="Saved addresses">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205630_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Profile">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205642_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Personal information">
+  <img src="https://github.com/MarwanYousef725/Graduated-Project/blob/master/assets/screenshots/Screenshot_20260922-205648_%D9%8DSmartPharmacy.png?raw=true" width="180" alt="Saved addresses">
 </p>
 
 <p align="center"><sub>Profile · Personal information · Saved addresses</sub></p>
